@@ -237,14 +237,14 @@ public final class GLES {
                 IntBuffer pi = stack.ints(0);
 
                 // Try the 3.0+ version query first
-                callPV(GetIntegerv, GL_MAJOR_VERSION, memAddress(pi));
+                callPV(GL_MAJOR_VERSION, memAddress(pi), GetIntegerv);
                 if (callI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = pi.get(0))) {
                     // We're on an 3.0+ context.
-                    callPV(GetIntegerv, GL_MINOR_VERSION, memAddress(pi));
+                    callPV(GL_MINOR_VERSION, memAddress(pi), GetIntegerv);
                     minorVersion = pi.get(0);
                 } else {
                     // Fallback to the string query.
-                    String versionString = memUTF8Safe(callP(GetString, GL_VERSION));
+                    String versionString = memUTF8Safe(callP(GL_VERSION, GetString));
                     if (versionString == null || callI(GetError) != GL_NO_ERROR) {
                         throw new IllegalStateException("There is no OpenGL ES context current in the current thread.");
                     }
@@ -288,7 +288,7 @@ public final class GLES {
 
             if (majorVersion < 3) {
                 // Parse EXTENSIONS string
-                String extensionsString = memASCIISafe(callP(GetString, GL_EXTENSIONS));
+                String extensionsString = memASCIISafe(callP(GL_EXTENSIONS, GetString));
                 if (extensionsString != null) {
                     StringTokenizer tokenizer = new StringTokenizer(extensionsString);
                     while (tokenizer.hasMoreTokens()) {
@@ -302,13 +302,13 @@ public final class GLES {
                 try (MemoryStack stack = stackPush()) {
                     IntBuffer pi = stack.ints(0);
 
-                    callPV(GetIntegerv, GL_NUM_EXTENSIONS, memAddress(pi));
+                    callPV(GL_NUM_EXTENSIONS, memAddress(pi), GetIntegerv);
                     extensionCount = pi.get(0);
                 }
 
                 long GetStringi = apiGetFunctionAddress(functionProvider, "glGetStringi");
                 for (int i = 0; i < extensionCount; i++) {
-                    supportedExtensions.add(memASCII(callP(GetStringi, GL_EXTENSIONS, i)));
+                    supportedExtensions.add(memASCII(callP(GL_EXTENSIONS, i, GetStringi)));
                 }
             }
 

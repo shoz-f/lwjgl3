@@ -317,7 +317,7 @@ public class AMDDebugOutput {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, category, severity, lengthSafe(ids), ids, enabled);
+        callPV(category, severity, lengthSafe(ids), ids, enabled, __functionAddress);
     }
 
     /** Array version of: {@link #glGetDebugMessageLogAMD GetDebugMessageLogAMD} */
@@ -331,7 +331,7 @@ public class AMDDebugOutput {
             checkSafe(ids, count);
             checkSafe(lengths, count);
         }
-        return callPPPPPI(__functionAddress, count, remainingSafe(messageLog), categories, severities, ids, lengths, memAddressSafe(messageLog));
+        return callPPPPPI(count, remainingSafe(messageLog), categories, severities, ids, lengths, memAddressSafe(messageLog), __functionAddress);
     }
 
 }

@@ -64,7 +64,7 @@ public final class AL {
 
             @Override
             public long getFunctionAddress(ByteBuffer functionName) {
-                long address = invokePP(alGetProcAddress, memAddress(functionName));
+                long address = invokePP(memAddress(functionName), alGetProcAddress);
                 if (address == NULL && Checks.DEBUG_FUNCTIONS) {
                     apiLog("Failed to locate address for AL function " + memASCII(functionName));
                 }
@@ -154,7 +154,7 @@ public final class AL {
                 throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that the OpenAL library has been loaded correctly.");
             }
 
-            String versionString = memASCIISafe(invokeP(GetString, AL_VERSION));
+            String versionString = memASCIISafe(invokeP(AL_VERSION, GetString));
             if (versionString == null || invokeI(GetError) != AL_NO_ERROR) {
                 throw new IllegalStateException("There is no OpenAL context current in the current thread or process.");
             }
@@ -180,7 +180,7 @@ public final class AL {
             }
 
             // Parse EXTENSIONS string
-            String extensionsString = memASCIISafe(invokeP(GetString, AL_EXTENSIONS));
+            String extensionsString = memASCIISafe(invokeP(AL_EXTENSIONS, GetString));
             if (extensionsString != null) {
                 MemoryStack stack = stackGet();
 
@@ -188,7 +188,7 @@ public final class AL {
                 while (tokenizer.hasMoreTokens()) {
                     String extName = tokenizer.nextToken();
                     try (MemoryStack frame = stack.push()) {
-                        if (invokePZ(IsExtensionPresent, memAddress(frame.ASCII(extName, true)))) {
+                        if (invokePZ(memAddress(frame.ASCII(extName, true)), IsExtensionPresent)) {
                             supportedExtensions.add(extName);
                         }
                     }

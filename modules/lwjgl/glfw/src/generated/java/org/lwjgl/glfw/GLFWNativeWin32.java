@@ -42,7 +42,7 @@ public class GLFWNativeWin32 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(__functionAddress, monitor);
+        return invokePP(monitor, __functionAddress);
     }
 
     /**
@@ -71,7 +71,7 @@ public class GLFWNativeWin32 {
         if (CHECKS) {
             check(monitor);
         }
-        return invokePP(__functionAddress, monitor);
+        return invokePP(monitor, __functionAddress);
     }
 
     /**
@@ -111,7 +111,7 @@ public class GLFWNativeWin32 {
         if (CHECKS) {
             check(window);
         }
-        return invokePP(__functionAddress, window);
+        return invokePP(window, __functionAddress);
     }
 
 }

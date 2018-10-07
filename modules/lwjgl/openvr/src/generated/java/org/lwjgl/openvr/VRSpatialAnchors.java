@@ -28,7 +28,7 @@ public class VRSpatialAnchors {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchDescriptor, pHandleOut);
+        return callPPI(pchDescriptor, pHandleOut, __functionAddress);
     }
 
     /**
@@ -70,7 +70,7 @@ public class VRSpatialAnchors {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unDeviceIndex, eOrigin, pPose, pHandleOut);
+        return callPPI(unDeviceIndex, eOrigin, pPose, pHandleOut, __functionAddress);
     }
 
     /**
@@ -103,7 +103,7 @@ public class VRSpatialAnchors {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unHandle, eOrigin, pPoseOut);
+        return callPI(unHandle, eOrigin, pPoseOut, __functionAddress);
     }
 
     /**
@@ -125,7 +125,7 @@ public class VRSpatialAnchors {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, unHandle, pchDescriptorOut, punDescriptorBufferLenInOut);
+        return callPPI(unHandle, pchDescriptorOut, punDescriptorBufferLenInOut, __functionAddress);
     }
 
     /**

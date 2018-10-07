@@ -98,7 +98,7 @@ public class EXTDebugLabel {
             check(__functionAddress);
             check(length, 1);
         }
-        callPPV(__functionAddress, type, object, label.remaining(), length, memAddress(label));
+        callPPV(type, object, label.remaining(), length, memAddress(label), __functionAddress);
     }
 
 }

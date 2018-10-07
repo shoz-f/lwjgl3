@@ -130,7 +130,7 @@ class Func(
     }
 
     internal val hasExplicitFunctionAddress
-        get() = this.parameters.isNotEmpty() && this.parameters[0] === EXPLICIT_FUNCTION_ADDRESS
+        get() = this.parameters.isNotEmpty() && this.parameters.last() === EXPLICIT_FUNCTION_ADDRESS
 
     private val hasNativeCode
         get() = (has<Code>() && get<Code>().let { it.nativeBeforeCall != null || it.nativeCall != null || it.nativeAfterCall != null }) || this.parameters.contains(JNI_ENV)
@@ -282,8 +282,8 @@ class Func(
                 }
             }
 
-            if (it === EXPLICIT_FUNCTION_ADDRESS && i != 0)
-                it.error("The explicit function address parameter must be the first parameter.")
+            if (it === EXPLICIT_FUNCTION_ADDRESS && i != parameters.lastIndex)
+                it.error("The explicit function address parameter must be the last parameter.")
 
             if (it.has<Check>()) {
                 val checkReference = paramMap[it.get<Check>().expression]
@@ -665,12 +665,12 @@ class Func(
         print("(")
 
         val nativeParams = getNativeParams()
-        if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
-            print("long $FUNCTION_ADDRESS")
-            if (nativeParams.any()) print(", ")
-        }
         printList(nativeParams) {
             it.asNativeMethodParam(nativeOnly)
+        }
+        if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
+            if (nativeParams.any()) print(", ")
+            print("long $FUNCTION_ADDRESS")
         }
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             if (nativeClass.binding != null || nativeParams.any()) print(", ")
@@ -682,12 +682,12 @@ class Func(
             if (retType != "void")
                 print("return ")
             print("${get<Reuse>().source.className}.n$name(")
-            if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
-                print(FUNCTION_ADDRESS)
-                if (nativeParams.any()) print(", ")
-            }
             printList(nativeParams) {
                 it.name
+            }
+            if (hasFunctionAddressParam && !hasExplicitFunctionAddress) {
+                if (nativeParams.any()) print(", ")
+                print(FUNCTION_ADDRESS)
             }
             println(");\n$t}")
         } else {
@@ -783,15 +783,15 @@ class Func(
         else
             "${nativeClass.callingConvention.method}${getNativeParams(withExplicitFunctionAddress = false).map { it.nativeType.jniSignatureJava }.joinToString("")}${returns.nativeType.jniSignature}("
         )
-        if (!hasExplicitFunctionAddress) {
-            print(FUNCTION_ADDRESS)
-            if (hasNativeParams) print(", ")
-        }
         printList(getNativeParams()) {
             if (it.isFunctionProvider)
                 "${it.name}.$ADDRESS"
             else
                 it.name
+        }
+        if (!hasExplicitFunctionAddress) {
+            if (hasNativeParams) print(", ")
+            print(FUNCTION_ADDRESS)
         }
         if (returns.isStructValue && !hasParam { it has ReturnParam }) {
             print(", ")
@@ -1048,13 +1048,13 @@ class Func(
                     .joinToString("")
                 }${returns.nativeType.jniSignature}(")
             }
-            if (hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
-                print(FUNCTION_ADDRESS)
-                if (hasNativeParams) print(", ")
-            }
         }
         if (macroExpression == null) {
             printParams()
+            if (!hasUnsafeMethod && hasFunctionAddressParam && !hasExplicitFunctionAddress && !has<Macro>()) {
+                if (hasNativeParams) print(", ")
+                print(FUNCTION_ADDRESS)
+            }
             if (returns.isStructValue && !hasParam { it has ReturnParam }) {
                 if (hasNativeParams) print(", ")
                 print("$RESULT.$ADDRESS")
@@ -1715,8 +1715,6 @@ class Func(
         val params = ArrayList<String>(4 + parameters.size)
         if (!critical)
             params.add("JNIEnv *$JNIENV, jclass clazz")
-        if (hasFunctionAddressParam)
-            params.add("jlong $FUNCTION_ADDRESS")
         getNativeParams(withExplicitFunctionAddress = false).map {
             if (it.nativeType is ArrayType<*>) {
                 if (critical)
@@ -1727,6 +1725,8 @@ class Func(
                 "${it.nativeType.jniFunctionType} ${it.name}${if (it.nativeType is PointerType<*> || it.nativeType is StructType) POINTER_POSTFIX else ""}"
             }
         }.toCollection(params)
+        if (hasFunctionAddressParam)
+            params.add("jlong $FUNCTION_ADDRESS")
         if (returns.isStructValue && !hasParam { it has ReturnParam })
             params.add("jlong $RESULT")
 

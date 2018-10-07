@@ -371,7 +371,7 @@ public class EXTDebugUtils {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, device.address(), pNameInfo);
+        return callPPI(device.address(), pNameInfo, __functionAddress);
     }
 
     /**
@@ -432,7 +432,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsObjectTagInfoEXT.validate(pTagInfo);
         }
-        return callPPI(__functionAddress, device.address(), pTagInfo);
+        return callPPI(device.address(), pTagInfo, __functionAddress);
     }
 
     /**
@@ -493,7 +493,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
         }
-        callPPV(__functionAddress, queue.address(), pLabelInfo);
+        callPPV(queue.address(), pLabelInfo, __functionAddress);
     }
 
     /**
@@ -576,7 +576,7 @@ public class EXTDebugUtils {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, queue.address());
+        callPV(queue.address(), __functionAddress);
     }
 
     // --- [ vkQueueInsertDebugUtilsLabelEXT ] ---
@@ -588,7 +588,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
         }
-        callPPV(__functionAddress, queue.address(), pLabelInfo);
+        callPPV(queue.address(), pLabelInfo, __functionAddress);
     }
 
     /**
@@ -637,7 +637,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pLabelInfo);
+        callPPV(commandBuffer.address(), pLabelInfo, __functionAddress);
     }
 
     /**
@@ -737,7 +737,7 @@ public class EXTDebugUtils {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, commandBuffer.address());
+        callPV(commandBuffer.address(), __functionAddress);
     }
 
     // --- [ vkCmdInsertDebugUtilsLabelEXT ] ---
@@ -749,7 +749,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsLabelEXT.validate(pLabelInfo);
         }
-        callPPV(__functionAddress, commandBuffer.address(), pLabelInfo);
+        callPPV(commandBuffer.address(), pLabelInfo, __functionAddress);
     }
 
     /**
@@ -806,7 +806,7 @@ public class EXTDebugUtils {
             VkDebugUtilsMessengerCreateInfoEXT.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo, pAllocator, pMessenger);
+        return callPPPPI(instance.address(), pCreateInfo, pAllocator, pMessenger, __functionAddress);
     }
 
     /**
@@ -871,7 +871,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, instance.address(), messenger, pAllocator);
+        callPJPV(instance.address(), messenger, pAllocator, __functionAddress);
     }
 
     /**
@@ -930,7 +930,7 @@ public class EXTDebugUtils {
             check(__functionAddress);
             VkDebugUtilsMessengerCallbackDataEXT.validate(pCallbackData);
         }
-        callPPV(__functionAddress, instance.address(), messageSeverity, messageTypes, pCallbackData);
+        callPPV(instance.address(), messageSeverity, messageTypes, pCallbackData, __functionAddress);
     }
 
     /**
@@ -984,7 +984,7 @@ public class EXTDebugUtils {
             VkDebugUtilsMessengerCreateInfoEXT.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pMessenger);
+        return callPPPPI(instance.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pMessenger, __functionAddress);
     }
 
 }

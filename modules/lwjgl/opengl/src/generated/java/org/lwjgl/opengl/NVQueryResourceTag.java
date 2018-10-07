@@ -102,7 +102,7 @@ public class NVQueryResourceTag {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tagIds.length, tagIds);
+        callPV(tagIds.length, tagIds, __functionAddress);
     }
 
     /** Array version of: {@link #glDeleteQueryResourceTagNV DeleteQueryResourceTagNV} */
@@ -111,7 +111,7 @@ public class NVQueryResourceTag {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, tagIds.length, tagIds);
+        callPV(tagIds.length, tagIds, __functionAddress);
     }
 
 }

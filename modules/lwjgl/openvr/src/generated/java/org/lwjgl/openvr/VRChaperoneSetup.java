@@ -38,7 +38,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callZ(__functionAddress, configFile);
+        return callZ(configFile, __functionAddress);
     }
 
     // --- [ VRChaperoneSetup_RevertWorkingCopy ] ---
@@ -65,7 +65,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pSizeX, pSizeZ);
+        return callPPZ(pSizeX, pSizeZ, __functionAddress);
     }
 
     /**
@@ -89,7 +89,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, rect);
+        return callPZ(rect, __functionAddress);
     }
 
     /**
@@ -111,7 +111,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pQuadsBuffer, punQuadsCount);
+        return callPPZ(pQuadsBuffer, punQuadsCount, __functionAddress);
     }
 
     /** Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified from the working copy. */
@@ -132,7 +132,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pQuadsBuffer, punQuadsCount);
+        return callPPZ(pQuadsBuffer, punQuadsCount, __functionAddress);
     }
 
     /** Returns the number of Quads if the buffer points to null. Otherwise it returns Quads into the buffer up to the max specified. */
@@ -153,7 +153,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pmatSeatedZeroPoseToRawTrackingPose);
+        return callPZ(pmatSeatedZeroPoseToRawTrackingPose, __functionAddress);
     }
 
     /** Returns the preferred seated position from the working copy. */
@@ -170,7 +170,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pmatStandingZeroPoseToRawTrackingPose);
+        return callPZ(pmatStandingZeroPoseToRawTrackingPose, __functionAddress);
     }
 
     /** Returns the standing origin from the working copy. */
@@ -187,7 +187,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, sizeX, sizeZ);
+        callV(sizeX, sizeZ, __functionAddress);
     }
 
     // --- [ VRChaperoneSetup_SetWorkingCollisionBoundsInfo ] ---
@@ -198,7 +198,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pQuadsBuffer, unQuadsCount);
+        callPV(pQuadsBuffer, unQuadsCount, __functionAddress);
     }
 
     /** Sets the Collision Bounds in the working copy. */
@@ -214,7 +214,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pMatSeatedZeroPoseToRawTrackingPose);
+        callPV(pMatSeatedZeroPoseToRawTrackingPose, __functionAddress);
     }
 
     /** Sets the preferred seated position in the working copy. */
@@ -230,7 +230,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pMatStandingZeroPoseToRawTrackingPose);
+        callPV(pMatStandingZeroPoseToRawTrackingPose, __functionAddress);
     }
 
     /** Sets the preferred standing position in the working copy. */
@@ -250,7 +250,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callV(__functionAddress, configFile);
+        callV(configFile, __functionAddress);
     }
 
     // --- [ VRChaperoneSetup_GetLiveSeatedZeroPoseToRawTrackingPose ] ---
@@ -261,7 +261,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pmatSeatedZeroPoseToRawTrackingPose);
+        return callPZ(pmatSeatedZeroPoseToRawTrackingPose, __functionAddress);
     }
 
     /** Returns the preferred seated position. */
@@ -277,7 +277,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pTagsBuffer, unTagCount);
+        callPV(pTagsBuffer, unTagCount, __functionAddress);
     }
 
     public static void VRChaperoneSetup_SetWorkingCollisionBoundsTagsInfo(@NativeType("uint8_t *") ByteBuffer pTagsBuffer) {
@@ -291,7 +291,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pTagsBuffer, punTagCount);
+        return callPPZ(pTagsBuffer, punTagCount, __functionAddress);
     }
 
     @NativeType("bool")
@@ -310,7 +310,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pQuadsBuffer, unQuadsCount);
+        return callPZ(pQuadsBuffer, unQuadsCount, __functionAddress);
     }
 
     @NativeType("bool")
@@ -325,7 +325,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pQuadsBuffer, punQuadsCount);
+        return callPPZ(pQuadsBuffer, punQuadsCount, __functionAddress);
     }
 
     @NativeType("bool")
@@ -344,7 +344,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pBuffer, pnBufferLength);
+        return callPPZ(pBuffer, pnBufferLength, __functionAddress);
     }
 
     @NativeType("bool")
@@ -363,7 +363,7 @@ public class VRChaperoneSetup {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPZ(__functionAddress, pBuffer, nImportFlags);
+        return callPZ(pBuffer, nImportFlags, __functionAddress);
     }
 
     @NativeType("bool")

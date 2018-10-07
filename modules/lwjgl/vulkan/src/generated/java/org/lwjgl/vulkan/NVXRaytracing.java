@@ -345,7 +345,7 @@ public class NVXRaytracing {
             VkAccelerationStructureCreateInfoNVX.validate(pCreateInfo);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo, pAllocator, pAccelerationStructure);
+        return callPPPPI(device.address(), pCreateInfo, pAllocator, pAccelerationStructure, __functionAddress);
     }
 
     /**
@@ -412,7 +412,7 @@ public class NVXRaytracing {
             check(__functionAddress);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        callPJPV(__functionAddress, device.address(), accelerationStructure, pAllocator);
+        callPJPV(device.address(), accelerationStructure, pAllocator, __functionAddress);
     }
 
     /**
@@ -459,7 +459,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, device.address(), pInfo, pMemoryRequirements);
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -507,7 +507,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPPPV(__functionAddress, device.address(), pInfo, pMemoryRequirements);
+        callPPPV(device.address(), pInfo, pMemoryRequirements, __functionAddress);
     }
 
     /**
@@ -558,7 +558,7 @@ public class NVXRaytracing {
             check(__functionAddress);
             VkBindAccelerationStructureMemoryInfoNVX.validate(pBindInfos, bindInfoCount);
         }
-        return callPPI(__functionAddress, device.address(), bindInfoCount, pBindInfos);
+        return callPPI(device.address(), bindInfoCount, pBindInfos, __functionAddress);
     }
 
     /**
@@ -622,7 +622,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJPJJJJV(__functionAddress, commandBuffer.address(), type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset);
+        callPJJPJJJJV(commandBuffer.address(), type, instanceCount, instanceData, instanceOffset, geometryCount, pGeometries, flags, update, dst, src, scratch, scratchOffset, __functionAddress);
     }
 
     /**
@@ -755,7 +755,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(__functionAddress, commandBuffer.address(), dst, src, mode);
+        callPJJV(commandBuffer.address(), dst, src, mode, __functionAddress);
     }
 
     // --- [ vkCmdTraceRaysNVX ] ---
@@ -826,7 +826,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJJJJJJJV(__functionAddress, commandBuffer.address(), raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height);
+        callPJJJJJJJJV(commandBuffer.address(), raygenShaderBindingTableBuffer, raygenShaderBindingOffset, missShaderBindingTableBuffer, missShaderBindingOffset, missShaderBindingStride, hitShaderBindingTableBuffer, hitShaderBindingOffset, hitShaderBindingStride, width, height, __functionAddress);
     }
 
     // --- [ vkCreateRaytracingPipelinesNVX ] ---
@@ -843,7 +843,7 @@ public class NVXRaytracing {
             VkRaytracingPipelineCreateInfoNVX.validate(pCreateInfos, createInfoCount);
             if (pAllocator != NULL) { VkAllocationCallbacks.validate(pAllocator); }
         }
-        return callPJPPPI(__functionAddress, device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines);
+        return callPJPPPI(device.address(), pipelineCache, createInfoCount, pCreateInfos, pAllocator, pPipelines, __functionAddress);
     }
 
     /**
@@ -921,7 +921,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), pipeline, firstGroup, groupCount, dataSize, pData);
+        return callPJPPI(device.address(), pipeline, firstGroup, groupCount, dataSize, pData, __functionAddress);
     }
 
     /**
@@ -987,7 +987,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJPPI(__functionAddress, device.address(), accelerationStructure, dataSize, pData);
+        return callPJPPI(device.address(), accelerationStructure, dataSize, pData, __functionAddress);
     }
 
     /**
@@ -1101,7 +1101,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPJJV(__functionAddress, commandBuffer.address(), accelerationStructure, queryType, queryPool, query);
+        callPJJV(commandBuffer.address(), accelerationStructure, queryType, queryPool, query, __functionAddress);
     }
 
     // --- [ vkCompileDeferredNVX ] ---
@@ -1158,7 +1158,7 @@ public class NVXRaytracing {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPJI(__functionAddress, device.address(), pipeline, shader);
+        return callPJI(device.address(), pipeline, shader, __functionAddress);
     }
 
     /** Array version of: {@link #vkCreateAccelerationStructureNVX CreateAccelerationStructureNVX} */
@@ -1171,7 +1171,7 @@ public class NVXRaytracing {
             VkAccelerationStructureCreateInfoNVX.validate(pCreateInfo.address());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPPPPI(__functionAddress, device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pAccelerationStructure);
+        return callPPPPI(device.address(), pCreateInfo.address(), memAddressSafe(pAllocator), pAccelerationStructure, __functionAddress);
     }
 
     /** Array version of: {@link #vkCreateRaytracingPipelinesNVX CreateRaytracingPipelinesNVX} */
@@ -1184,7 +1184,7 @@ public class NVXRaytracing {
             VkRaytracingPipelineCreateInfoNVX.validate(pCreateInfos.address(), pCreateInfos.remaining());
             if (pAllocator != null) { VkAllocationCallbacks.validate(pAllocator.address()); }
         }
-        return callPJPPPI(__functionAddress, device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines);
+        return callPJPPPI(device.address(), pipelineCache, pCreateInfos.remaining(), pCreateInfos.address(), memAddressSafe(pAllocator), pPipelines, __functionAddress);
     }
 
 }

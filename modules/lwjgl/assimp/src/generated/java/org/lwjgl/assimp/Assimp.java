@@ -2034,7 +2034,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiGetExportFormatDescription GetExportFormatDescription} */
     public static long naiGetExportFormatDescription(long pIndex) {
         long __functionAddress = Functions.GetExportFormatDescription;
-        return invokePP(__functionAddress, pIndex);
+        return invokePP(pIndex, __functionAddress);
     }
 
     /**
@@ -2060,7 +2060,7 @@ public class Assimp {
         if (CHECKS) {
             AIExportFormatDesc.validate(desc);
         }
-        invokePV(__functionAddress, desc);
+        invokePV(desc, __functionAddress);
     }
 
     /**
@@ -2080,7 +2080,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pIn);
         }
-        invokePPV(__functionAddress, pIn, pOut);
+        invokePPV(pIn, pOut, __functionAddress);
     }
 
     /**
@@ -2128,7 +2128,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pIn);
         }
-        invokePV(__functionAddress, pIn);
+        invokePV(pIn, __functionAddress);
     }
 
     /**
@@ -2148,7 +2148,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pScene);
         }
-        return invokePPPI(__functionAddress, pScene, pFormatId, pFileName, pPreProcessing);
+        return invokePPPI(pScene, pFormatId, pFileName, pPreProcessing, __functionAddress);
     }
 
     /**
@@ -2241,7 +2241,7 @@ public class Assimp {
             AIScene.validate(pScene);
             if (pIO != NULL) { AIFileIO.validate(pIO); }
         }
-        return invokePPPPI(__functionAddress, pScene, pFormatId, pFileName, pIO, pPreProcessing);
+        return invokePPPPI(pScene, pFormatId, pFileName, pIO, pPreProcessing, __functionAddress);
     }
 
     /**
@@ -2337,7 +2337,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pScene);
         }
-        return invokePPP(__functionAddress, pScene, pFormatId, pPreProcessing);
+        return invokePPP(pScene, pFormatId, pPreProcessing, __functionAddress);
     }
 
     /**
@@ -2423,7 +2423,7 @@ public class Assimp {
         if (CHECKS) {
             AIExportDataBlob.validate(pData);
         }
-        invokePV(__functionAddress, pData);
+        invokePV(pData, __functionAddress);
     }
 
     /**
@@ -2440,7 +2440,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiImportFile ImportFile} */
     public static long naiImportFile(long pFile, int pFlags) {
         long __functionAddress = Functions.ImportFile;
-        return invokePP(__functionAddress, pFile, pFlags);
+        return invokePP(pFile, pFlags, __functionAddress);
     }
 
     /**
@@ -2500,7 +2500,7 @@ public class Assimp {
         if (CHECKS) {
             if (pFS != NULL) { AIFileIO.validate(pFS); }
         }
-        return invokePPP(__functionAddress, pFile, pFlags, pFS);
+        return invokePPP(pFile, pFlags, pFS, __functionAddress);
     }
 
     /**
@@ -2562,7 +2562,7 @@ public class Assimp {
         if (CHECKS) {
             if (pFS != NULL) { AIFileIO.validate(pFS); }
         }
-        return invokePPPP(__functionAddress, pFile, pFlags, pFS, pProps);
+        return invokePPPP(pFile, pFlags, pFS, pProps, __functionAddress);
     }
 
     /**
@@ -2619,7 +2619,7 @@ public class Assimp {
      */
     public static long naiImportFileFromMemory(long pBuffer, int pLength, int pFlags, long pHint) {
         long __functionAddress = Functions.ImportFileFromMemory;
-        return invokePPP(__functionAddress, pBuffer, pLength, pFlags, pHint);
+        return invokePPP(pBuffer, pLength, pFlags, pHint, __functionAddress);
     }
 
     /**
@@ -2700,7 +2700,7 @@ public class Assimp {
      */
     public static long naiImportFileFromMemoryWithProperties(long pBuffer, int pLength, int pFlags, long pHint, long pProps) {
         long __functionAddress = Functions.ImportFileFromMemoryWithProperties;
-        return invokePPPP(__functionAddress, pBuffer, pLength, pFlags, pHint, pProps);
+        return invokePPPP(pBuffer, pLength, pFlags, pHint, pProps, __functionAddress);
     }
 
     /**
@@ -2760,7 +2760,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pScene);
         }
-        return invokePP(__functionAddress, pScene, pFlags);
+        return invokePP(pScene, pFlags, __functionAddress);
     }
 
     /**
@@ -2792,7 +2792,7 @@ public class Assimp {
         if (CHECKS) {
             AILogStream.validate(stream);
         }
-        invokePV(__functionAddress, stream);
+        invokePV(stream, __functionAddress);
     }
 
     /**
@@ -2822,7 +2822,7 @@ public class Assimp {
      */
     public static void aiEnableVerboseLogging(@NativeType("aiBool") boolean d) {
         long __functionAddress = Functions.EnableVerboseLogging;
-        invokeV(__functionAddress, d ? 1 : 0);
+        invokeV(d ? 1 : 0, __functionAddress);
     }
 
     // --- [ aiDetachLogStream ] ---
@@ -2833,7 +2833,7 @@ public class Assimp {
         if (CHECKS) {
             AILogStream.validate(stream);
         }
-        return invokePI(__functionAddress, stream);
+        return invokePI(stream, __functionAddress);
     }
 
     /**
@@ -2869,7 +2869,7 @@ public class Assimp {
         if (CHECKS) {
             if (pScene != NULL) { AIScene.validate(pScene); }
         }
-        invokePV(__functionAddress, pScene);
+        invokePV(pScene, __functionAddress);
     }
 
     /**
@@ -2909,7 +2909,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiIsExtensionSupported IsExtensionSupported} */
     public static int naiIsExtensionSupported(long szExtension) {
         long __functionAddress = Functions.IsExtensionSupported;
-        return invokePI(__functionAddress, szExtension);
+        return invokePI(szExtension, __functionAddress);
     }
 
     /**
@@ -2950,7 +2950,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiGetExtensionList GetExtensionList} */
     public static void naiGetExtensionList(long szOut) {
         long __functionAddress = Functions.GetExtensionList;
-        invokePV(__functionAddress, szOut);
+        invokePV(szOut, __functionAddress);
     }
 
     /**
@@ -2972,7 +2972,7 @@ public class Assimp {
         if (CHECKS) {
             AIScene.validate(pIn);
         }
-        invokePPV(__functionAddress, pIn, in);
+        invokePPV(pIn, in, __functionAddress);
     }
 
     /**
@@ -3010,7 +3010,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiReleasePropertyStore ReleasePropertyStore} */
     public static void naiReleasePropertyStore(long p) {
         long __functionAddress = Functions.ReleasePropertyStore;
-        invokePV(__functionAddress, p);
+        invokePV(p, __functionAddress);
     }
 
     /**
@@ -3027,7 +3027,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiSetImportPropertyInteger SetImportPropertyInteger} */
     public static void naiSetImportPropertyInteger(long store, long szName, int value) {
         long __functionAddress = Functions.SetImportPropertyInteger;
-        invokePPV(__functionAddress, store, szName, value);
+        invokePPV(store, szName, value, __functionAddress);
     }
 
     /**
@@ -3072,7 +3072,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiSetImportPropertyFloat SetImportPropertyFloat} */
     public static void naiSetImportPropertyFloat(long store, long szName, float value) {
         long __functionAddress = Functions.SetImportPropertyFloat;
-        invokePPV(__functionAddress, store, szName, value);
+        invokePPV(store, szName, value, __functionAddress);
     }
 
     /**
@@ -3117,7 +3117,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiSetImportPropertyString SetImportPropertyString} */
     public static void naiSetImportPropertyString(long store, long szName, long value) {
         long __functionAddress = Functions.SetImportPropertyString;
-        invokePPPV(__functionAddress, store, szName, value);
+        invokePPPV(store, szName, value, __functionAddress);
     }
 
     /**
@@ -3162,7 +3162,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiSetImportPropertyMatrix SetImportPropertyMatrix} */
     public static void naiSetImportPropertyMatrix(long store, long szName, long value) {
         long __functionAddress = Functions.SetImportPropertyMatrix;
-        invokePPPV(__functionAddress, store, szName, value);
+        invokePPPV(store, szName, value, __functionAddress);
     }
 
     /**
@@ -3207,7 +3207,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiCreateQuaternionFromMatrix CreateQuaternionFromMatrix} */
     public static void naiCreateQuaternionFromMatrix(long quat, long mat) {
         long __functionAddress = Functions.CreateQuaternionFromMatrix;
-        invokePPV(__functionAddress, quat, mat);
+        invokePPV(quat, mat, __functionAddress);
     }
 
     /**
@@ -3225,7 +3225,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiDecomposeMatrix DecomposeMatrix} */
     public static void naiDecomposeMatrix(long mat, long scaling, long rotation, long position) {
         long __functionAddress = Functions.DecomposeMatrix;
-        invokePPPPV(__functionAddress, mat, scaling, rotation, position);
+        invokePPPPV(mat, scaling, rotation, position, __functionAddress);
     }
 
     /**
@@ -3245,7 +3245,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiTransposeMatrix4 TransposeMatrix4} */
     public static void naiTransposeMatrix4(long mat) {
         long __functionAddress = Functions.TransposeMatrix4;
-        invokePV(__functionAddress, mat);
+        invokePV(mat, __functionAddress);
     }
 
     /**
@@ -3262,7 +3262,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiTransposeMatrix3 TransposeMatrix3} */
     public static void naiTransposeMatrix3(long mat) {
         long __functionAddress = Functions.TransposeMatrix3;
-        invokePV(__functionAddress, mat);
+        invokePV(mat, __functionAddress);
     }
 
     /**
@@ -3279,7 +3279,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiTransformVecByMatrix3 TransformVecByMatrix3} */
     public static void naiTransformVecByMatrix3(long vec, long mat) {
         long __functionAddress = Functions.TransformVecByMatrix3;
-        invokePPV(__functionAddress, vec, mat);
+        invokePPV(vec, mat, __functionAddress);
     }
 
     /**
@@ -3297,7 +3297,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiTransformVecByMatrix4 TransformVecByMatrix4} */
     public static void naiTransformVecByMatrix4(long vec, long mat) {
         long __functionAddress = Functions.TransformVecByMatrix4;
-        invokePPV(__functionAddress, vec, mat);
+        invokePPV(vec, mat, __functionAddress);
     }
 
     /**
@@ -3315,7 +3315,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiMultiplyMatrix4 MultiplyMatrix4} */
     public static void naiMultiplyMatrix4(long dst, long src) {
         long __functionAddress = Functions.MultiplyMatrix4;
-        invokePPV(__functionAddress, dst, src);
+        invokePPV(dst, src, __functionAddress);
     }
 
     /**
@@ -3333,7 +3333,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiMultiplyMatrix3 MultiplyMatrix3} */
     public static void naiMultiplyMatrix3(long dst, long src) {
         long __functionAddress = Functions.MultiplyMatrix3;
-        invokePPV(__functionAddress, dst, src);
+        invokePPV(dst, src, __functionAddress);
     }
 
     /**
@@ -3351,7 +3351,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiIdentityMatrix3 IdentityMatrix3} */
     public static void naiIdentityMatrix3(long mat) {
         long __functionAddress = Functions.IdentityMatrix3;
-        invokePV(__functionAddress, mat);
+        invokePV(mat, __functionAddress);
     }
 
     /**
@@ -3368,7 +3368,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiIdentityMatrix4 IdentityMatrix4} */
     public static void naiIdentityMatrix4(long mat) {
         long __functionAddress = Functions.IdentityMatrix4;
-        invokePV(__functionAddress, mat);
+        invokePV(mat, __functionAddress);
     }
 
     /**
@@ -3397,7 +3397,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiGetImportFormatDescription GetImportFormatDescription} */
     public static long naiGetImportFormatDescription(long pIndex) {
         long __functionAddress = Functions.GetImportFormatDescription;
-        return invokePP(__functionAddress, pIndex);
+        return invokePP(pIndex, __functionAddress);
     }
 
     /**
@@ -3419,7 +3419,7 @@ public class Assimp {
     /** Unsafe version of: {@link #aiGetImporterDesc GetImporterDesc} */
     public static long naiGetImporterDesc(long extension) {
         long __functionAddress = Functions.GetImporterDesc;
-        return invokePP(__functionAddress, extension);
+        return invokePP(extension, __functionAddress);
     }
 
     /**
@@ -3471,7 +3471,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPI(__functionAddress, pMat, pKey, type, index, mPropOut);
+        return invokePPPI(pMat, pKey, type, index, mPropOut, __functionAddress);
     }
 
     /**
@@ -3561,7 +3561,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPPI(__functionAddress, pMat, pKey, type, index, pOut, pMax);
+        return invokePPPPI(pMat, pKey, type, index, pOut, pMax, __functionAddress);
     }
 
     /**
@@ -3625,7 +3625,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPPI(__functionAddress, pMat, pKey, type, index, pOut, pMax);
+        return invokePPPPI(pMat, pKey, type, index, pOut, pMax, __functionAddress);
     }
 
     /**
@@ -3685,7 +3685,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPI(__functionAddress, pMat, pKey, type, index, pOut);
+        return invokePPPI(pMat, pKey, type, index, pOut, __functionAddress);
     }
 
     /**
@@ -3737,7 +3737,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPI(__functionAddress, pMat, pKey, type, index, pOut);
+        return invokePPPI(pMat, pKey, type, index, pOut, __functionAddress);
     }
 
     /**
@@ -3789,7 +3789,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPI(__functionAddress, pMat, pKey, type, index, pOut);
+        return invokePPPI(pMat, pKey, type, index, pOut, __functionAddress);
     }
 
     /**
@@ -3841,7 +3841,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePI(__functionAddress, pMat, type);
+        return invokePI(pMat, type, __functionAddress);
     }
 
     /**
@@ -3865,7 +3865,7 @@ public class Assimp {
         if (CHECKS) {
             AIMaterial.validate(pMat);
         }
-        return invokePPPPPPPPI(__functionAddress, pMat, type, index, path, mapping, uvindex, blend, op, mapmode, flags);
+        return invokePPPPPPPPI(pMat, type, index, path, mapping, uvindex, blend, op, mapmode, flags, __functionAddress);
     }
 
     /**
@@ -4005,7 +4005,7 @@ public class Assimp {
             check(pOut, pMax[0]);
             AIMaterial.validate(pMat.address());
         }
-        return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKey), type, index, pOut, pMax);
+        return invokePPPPI(pMat.address(), memAddress(pKey), type, index, pOut, pMax, __functionAddress);
     }
 
     /** Array version of: {@link #aiGetMaterialFloatArray GetMaterialFloatArray} */
@@ -4020,7 +4020,7 @@ public class Assimp {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax);
+            return invokePPPPI(pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4036,7 +4036,7 @@ public class Assimp {
             check(pOut, pMax[0]);
             AIMaterial.validate(pMat.address());
         }
-        return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKey), type, index, pOut, pMax);
+        return invokePPPPI(pMat.address(), memAddress(pKey), type, index, pOut, pMax, __functionAddress);
     }
 
     /** Array version of: {@link #aiGetMaterialIntegerArray GetMaterialIntegerArray} */
@@ -4051,7 +4051,7 @@ public class Assimp {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer pKeyEncoded = stack.ASCII(pKey);
-            return invokePPPPI(__functionAddress, pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax);
+            return invokePPPPI(pMat.address(), memAddress(pKeyEncoded), type, index, pOut, pMax, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -4070,7 +4070,7 @@ public class Assimp {
             checkSafe(flags, 1);
             AIMaterial.validate(pMat.address());
         }
-        return invokePPPPPPPPI(__functionAddress, pMat.address(), type, index, path.address(), mapping, uvindex, blend, op, mapmode, flags);
+        return invokePPPPPPPPI(pMat.address(), type, index, path.address(), mapping, uvindex, blend, op, mapmode, flags, __functionAddress);
     }
 
 }

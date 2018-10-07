@@ -91,7 +91,7 @@ public final class ALC {
 
         @Override
         public long getFunctionAddress(long handle, ByteBuffer functionName) {
-            long address = invokePPP(alcGetProcAddress, handle, memAddress(functionName));
+            long address = invokePPP(handle, memAddress(functionName), alcGetProcAddress);
             if (address == NULL && Checks.DEBUG_FUNCTIONS) {
                 apiLog("Failed to locate address for ALC extension function " + memASCII(functionName));
             }
@@ -189,10 +189,10 @@ public final class ALC {
         try (MemoryStack stack = stackPush()) {
             IntBuffer version = stack.mallocInt(1);
 
-            invokePPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, memAddress(version));
+            invokePPV(device, ALC_MAJOR_VERSION, 1, memAddress(version), GetIntegerv);
             majorVersion = version.get(0);
 
-            invokePPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, memAddress(version));
+            invokePPV(device, ALC_MINOR_VERSION, 1, memAddress(version), GetIntegerv);
             minorVersion = version.get(0);
         }
 
@@ -212,13 +212,13 @@ public final class ALC {
         }
 
         // Parse EXTENSIONS string
-        String extensionsString = memASCIISafe(invokePP(GetString, device, ALC_EXTENSIONS));
+        String extensionsString = memASCIISafe(invokePP(device, ALC_EXTENSIONS, GetString));
         if (extensionsString != null) {
             StringTokenizer tokenizer = new StringTokenizer(extensionsString);
             while (tokenizer.hasMoreTokens()) {
                 String extName = tokenizer.nextToken();
                 try (MemoryStack stack = stackPush()) {
-                    if (invokePPZ(IsExtensionPresent, device, memAddress(stack.ASCII(extName, true)))) {
+                    if (invokePPZ(device, memAddress(stack.ASCII(extName, true)), IsExtensionPresent)) {
                         supportedExtensions.add(extName);
                     }
                 }

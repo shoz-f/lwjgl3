@@ -14,7 +14,7 @@ typedef jint (APIENTRY *SwapBuffersPROC) (intptr_t);
 
 EXTERN_C_ENTER
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong hdcAddress, jlong pixelFormatDescriptorAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     ChoosePixelFormatPROC ChoosePixelFormat = (ChoosePixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
@@ -25,7 +25,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nChoosePixelFormat(JN
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong hdcAddress, jint pixelFormat, jint bytes, jlong pixelFormatDescriptorAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jint bytes, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     DescribePixelFormatPROC DescribePixelFormat = (DescribePixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
@@ -36,7 +36,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nDescribePixelFormat(
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nGetPixelFormat(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong hdcAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nGetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jlong __functionAddress) {
     GetPixelFormatPROC GetPixelFormat = (GetPixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     jint __result;
@@ -46,7 +46,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nGetPixelFormat(JNIEn
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSetPixelFormat(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong hdcAddress, jint pixelFormat, jlong pixelFormatDescriptorAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSetPixelFormat(JNIEnv *__env, jclass clazz, jlong hdcAddress, jint pixelFormat, jlong pixelFormatDescriptorAddress, jlong __functionAddress) {
     SetPixelFormatPROC SetPixelFormat = (SetPixelFormatPROC)(intptr_t)__functionAddress;
     intptr_t hdc = (intptr_t)hdcAddress;
     intptr_t pixelFormatDescriptor = (intptr_t)pixelFormatDescriptorAddress;
@@ -57,7 +57,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSetPixelFormat(JNIEn
     return __result;
 }
 
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSwapBuffers(JNIEnv *__env, jclass clazz, jlong __functionAddress, jlong dcAddress) {
+JNIEXPORT jint JNICALL Java_org_lwjgl_system_windows_GDI32_nSwapBuffers(JNIEnv *__env, jclass clazz, jlong dcAddress, jlong __functionAddress) {
     SwapBuffersPROC SwapBuffers = (SwapBuffersPROC)(intptr_t)__functionAddress;
     intptr_t dc = (intptr_t)dcAddress;
     jint __result;

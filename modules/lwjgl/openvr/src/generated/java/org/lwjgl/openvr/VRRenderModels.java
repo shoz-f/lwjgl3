@@ -32,7 +32,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchRenderModelName, ppRenderModel);
+        return callPPI(pchRenderModelName, ppRenderModel, __functionAddress);
     }
 
     /**
@@ -80,7 +80,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pRenderModel);
+        callPV(pRenderModel, __functionAddress);
     }
 
     /** Frees a previously returned render model It is safe to call this on a null ptr. */
@@ -96,7 +96,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, textureId, ppTexture);
+        return callPI(textureId, ppTexture, __functionAddress);
     }
 
     /** Loads and returns a texture for use in the application. */
@@ -116,7 +116,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pTexture);
+        callPV(pTexture, __functionAddress);
     }
 
     /** Frees a previously returned texture. It is safe to call this on a null ptr. */
@@ -133,7 +133,7 @@ public class VRRenderModels {
             check(__functionAddress);
             check(pD3D11Device);
         }
-        return callPPI(__functionAddress, textureId, pD3D11Device, ppD3D11Texture2D);
+        return callPPI(textureId, pD3D11Device, ppD3D11Texture2D, __functionAddress);
     }
 
     /** Creates a D3D11 texture and loads data into it. */
@@ -155,7 +155,7 @@ public class VRRenderModels {
             check(__functionAddress);
             check(pDstTexture);
         }
-        return callPI(__functionAddress, textureId, pDstTexture);
+        return callPI(textureId, pDstTexture, __functionAddress);
     }
 
     // --- [ VRRenderModels_FreeTextureD3D11 ] ---
@@ -167,7 +167,7 @@ public class VRRenderModels {
             check(__functionAddress);
             check(pD3D11Texture2D);
         }
-        callPV(__functionAddress, pD3D11Texture2D);
+        callPV(pD3D11Texture2D, __functionAddress);
     }
 
     // --- [ VRRenderModels_GetRenderModelName ] ---
@@ -178,7 +178,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, unRenderModelIndex, pchRenderModelName, unRenderModelNameLen);
+        return callPI(unRenderModelIndex, pchRenderModelName, unRenderModelNameLen, __functionAddress);
     }
 
     /**
@@ -228,7 +228,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchRenderModelName);
+        return callPI(pchRenderModelName, __functionAddress);
     }
 
     /**
@@ -268,7 +268,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchRenderModelName, unComponentIndex, pchComponentName, unComponentNameLen);
+        return callPPI(pchRenderModelName, unComponentIndex, pchComponentName, unComponentNameLen, __functionAddress);
     }
 
     /**
@@ -326,7 +326,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJ(__functionAddress, pchRenderModelName, pchComponentName);
+        return callPPJ(pchRenderModelName, pchComponentName, __functionAddress);
     }
 
     /**
@@ -384,7 +384,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchRenderModelName, pchComponentName, pchComponentRenderModelName, unComponentRenderModelNameLen);
+        return callPPPI(pchRenderModelName, pchComponentName, pchComponentRenderModelName, unComponentRenderModelNameLen, __functionAddress);
     }
 
     /**
@@ -442,7 +442,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJPPI(__functionAddress, pchRenderModelName, pchComponentName, devicePath, pState, pComponentState);
+        return callPPJPPI(pchRenderModelName, pchComponentName, devicePath, pState, pComponentState, __functionAddress);
     }
 
     /**
@@ -484,7 +484,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPPZ(__functionAddress, pchRenderModelName, pchComponentName, pControllerState, pState, pComponentState);
+        return callPPPPPZ(pchRenderModelName, pchComponentName, pControllerState, pState, pComponentState, __functionAddress);
     }
 
     /**
@@ -524,7 +524,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPZ(__functionAddress, pchRenderModelName, pchComponentName);
+        return callPPZ(pchRenderModelName, pchComponentName, __functionAddress);
     }
 
     /** Returns true if the render model has a component with the specified name. */
@@ -558,7 +558,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchRenderModelName, pchThumbnailURL, unThumbnailURLLen, peError);
+        return callPPPI(pchRenderModelName, pchThumbnailURL, unThumbnailURLLen, peError, __functionAddress);
     }
 
     /** Returns the URL of the thumbnail image for this rendermodel. */
@@ -611,7 +611,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchRenderModelName, pchOriginalPath, unOriginalPathLen, peError);
+        return callPPPI(pchRenderModelName, pchOriginalPath, unOriginalPathLen, peError, __functionAddress);
     }
 
     /**
@@ -673,7 +673,7 @@ public class VRRenderModels {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, error);
+        return callP(error, __functionAddress);
     }
 
     /** Returns a string for a render model error. */

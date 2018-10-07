@@ -28,7 +28,7 @@ public class VRIOBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchPath, mode, unElementSize, unElements, pulBuffer);
+        return callPPI(pchPath, mode, unElementSize, unElements, pulBuffer, __functionAddress);
     }
 
     /**
@@ -73,7 +73,7 @@ public class VRIOBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulBuffer);
+        return callJI(ulBuffer, __functionAddress);
     }
 
     // --- [ VRIOBuffer_Read ] ---
@@ -84,7 +84,7 @@ public class VRIOBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulBuffer, pDst, unBytes, punRead);
+        return callJPPI(ulBuffer, pDst, unBytes, punRead, __functionAddress);
     }
 
     /** Reads up to {@code unBytes} from buffer into {@code *pDst}, returning number of bytes read in {@code *punRead} */
@@ -104,7 +104,7 @@ public class VRIOBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulBuffer, pSrc, unBytes);
+        return callJPI(ulBuffer, pSrc, unBytes, __functionAddress);
     }
 
     /** Writes {@code unBytes} of data from {@code *pSrc} into a buffer. */
@@ -122,7 +122,7 @@ public class VRIOBuffer {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJ(__functionAddress, ulBuffer);
+        return callJJ(ulBuffer, __functionAddress);
     }
 
 }

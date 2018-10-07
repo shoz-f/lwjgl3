@@ -33,7 +33,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPI(__functionAddress, pchOverlayKey, pOverlayHandle);
+        return callPPI(pchOverlayKey, pOverlayHandle, __functionAddress);
     }
 
     /** Finds an existing overlay with the specified key. */
@@ -69,7 +69,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPI(__functionAddress, pchOverlayKey, pchOverlayName, pOverlayHandle);
+        return callPPPI(pchOverlayKey, pchOverlayName, pOverlayHandle, __functionAddress);
     }
 
     /** Creates a new named overlay. All overlays start hidden and with default settings. */
@@ -108,7 +108,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_SetHighQualityOverlay ] ---
@@ -127,7 +127,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_GetHighQualityOverlay ] ---
@@ -153,7 +153,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, pchValue, unBufferSize, pError);
+        return callJPPI(ulOverlayHandle, pchValue, unBufferSize, pError, __functionAddress);
     }
 
     /**
@@ -195,7 +195,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, pchValue, unBufferSize, pError);
+        return callJPPI(ulOverlayHandle, pchValue, unBufferSize, pError, __functionAddress);
     }
 
     /**
@@ -237,7 +237,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pchName);
+        return callJPI(ulOverlayHandle, pchName, __functionAddress);
     }
 
     /** Sets the name to use for this overlay. */
@@ -269,7 +269,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPPI(__functionAddress, ulOverlayHandle, pvBuffer, unBufferSize, punWidth, punHeight);
+        return callJPPPI(ulOverlayHandle, pvBuffer, unBufferSize, punWidth, punHeight, __functionAddress);
     }
 
     /**
@@ -293,7 +293,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callP(__functionAddress, error);
+        return callP(error, __functionAddress);
     }
 
     /**
@@ -320,7 +320,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, unPID);
+        return callJI(ulOverlayHandle, unPID, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayRenderingPid ] ---
@@ -332,7 +332,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_SetOverlayFlag ] ---
@@ -348,7 +348,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, eOverlayFlag, bEnabled);
+        return callJI(ulOverlayHandle, eOverlayFlag, bEnabled, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayFlag ] ---
@@ -359,7 +359,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, eOverlayFlag, pbEnabled);
+        return callJPI(ulOverlayHandle, eOverlayFlag, pbEnabled, __functionAddress);
     }
 
     /**
@@ -384,7 +384,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, fRed, fGreen, fBlue);
+        return callJI(ulOverlayHandle, fRed, fGreen, fBlue, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayColor ] ---
@@ -395,7 +395,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPPI(__functionAddress, ulOverlayHandle, pfRed, pfGreen, pfBlue);
+        return callJPPPI(ulOverlayHandle, pfRed, pfGreen, pfBlue, __functionAddress);
     }
 
     /** Gets the color tint of the overlay quad. */
@@ -418,7 +418,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, fAlpha);
+        return callJI(ulOverlayHandle, fAlpha, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayAlpha ] ---
@@ -429,7 +429,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pfAlpha);
+        return callJPI(ulOverlayHandle, pfAlpha, __functionAddress);
     }
 
     /** Gets the alpha of the overlay quad. By default overlays are rendering at 100 percent alpha (1.0). */
@@ -454,7 +454,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, fTexelAspect);
+        return callJI(ulOverlayHandle, fTexelAspect, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayTexelAspect ] ---
@@ -465,7 +465,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pfTexelAspect);
+        return callJPI(ulOverlayHandle, pfTexelAspect, __functionAddress);
     }
 
     /** Gets the aspect ratio of the texels in the overlay. Defaults to 1.0. */
@@ -498,7 +498,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, unSortOrder);
+        return callJI(ulOverlayHandle, unSortOrder, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlaySortOrder ] ---
@@ -509,7 +509,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, punSortOrder);
+        return callJPI(ulOverlayHandle, punSortOrder, __functionAddress);
     }
 
     /** Gets the sort order of the overlay. See {@link #VROverlay_SetOverlaySortOrder SetOverlaySortOrder} for how this works. */
@@ -530,7 +530,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, fWidthInMeters);
+        return callJI(ulOverlayHandle, fWidthInMeters, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayWidthInMeters ] ---
@@ -541,7 +541,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pfWidthInMeters);
+        return callJPI(ulOverlayHandle, pfWidthInMeters, __functionAddress);
     }
 
     /** Returns the width of the overlay quad in meters. By default overlays are rendered on a quad that is 1 meter across. */
@@ -565,7 +565,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, fMinDistanceInMeters, fMaxDistanceInMeters);
+        return callJI(ulOverlayHandle, fMinDistanceInMeters, fMaxDistanceInMeters, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayAutoCurveDistanceRangeInMeters ] ---
@@ -576,7 +576,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, pfMinDistanceInMeters, pfMaxDistanceInMeters);
+        return callJPPI(ulOverlayHandle, pfMinDistanceInMeters, pfMaxDistanceInMeters, __functionAddress);
     }
 
     /**
@@ -606,7 +606,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, eTextureColorSpace);
+        return callJI(ulOverlayHandle, eTextureColorSpace, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayTextureColorSpace ] ---
@@ -617,7 +617,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, peTextureColorSpace);
+        return callJPI(ulOverlayHandle, peTextureColorSpace, __functionAddress);
     }
 
     /** Gets the overlay's current colorspace setting. */
@@ -637,7 +637,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pOverlayTextureBounds);
+        return callJPI(ulOverlayHandle, pOverlayTextureBounds, __functionAddress);
     }
 
     /** Sets the part of the texture to use for the overlay. UV Min is the upper left corner and UV Max is the lower right corner. */
@@ -654,7 +654,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pOverlayTextureBounds);
+        return callJPI(ulOverlayHandle, pOverlayTextureBounds, __functionAddress);
     }
 
     /** Gets the part of the texture to use for the overlay. UV Min is the upper left corner and UV Max is the lower right corner. */
@@ -671,7 +671,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPPI(__functionAddress, ulOverlayHandle, pchValue, unBufferSize, pColor, pError);
+        return callJPPPI(ulOverlayHandle, pchValue, unBufferSize, pColor, pError, __functionAddress);
     }
 
     /** Gets render model to draw behind this overlay. */
@@ -690,7 +690,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, pchRenderModel, pColor);
+        return callJPPI(ulOverlayHandle, pchRenderModel, pColor, __functionAddress);
     }
 
     @NativeType("EVROverlayError")
@@ -720,7 +720,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, peTransformType);
+        return callJPI(ulOverlayHandle, peTransformType, __functionAddress);
     }
 
     /** Returns the transform type of this overlay. */
@@ -740,7 +740,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, eTrackingOrigin, pmatTrackingOriginToOverlayTransform);
+        return callJPI(ulOverlayHandle, eTrackingOrigin, pmatTrackingOriginToOverlayTransform, __functionAddress);
     }
 
     /**
@@ -761,7 +761,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, peTrackingOrigin, pmatTrackingOriginToOverlayTransform);
+        return callJPPI(ulOverlayHandle, peTrackingOrigin, pmatTrackingOriginToOverlayTransform, __functionAddress);
     }
 
     /** Gets the transform if it is absolute. Returns an error if the transform is some other type. */
@@ -781,7 +781,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, unTrackedDevice, pmatTrackedDeviceToOverlayTransform);
+        return callJPI(ulOverlayHandle, unTrackedDevice, pmatTrackedDeviceToOverlayTransform, __functionAddress);
     }
 
     /** Sets the transform to relative to the transform of the specified tracked device. */
@@ -798,7 +798,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, punTrackedDevice, pmatTrackedDeviceToOverlayTransform);
+        return callJPPI(ulOverlayHandle, punTrackedDevice, pmatTrackedDeviceToOverlayTransform, __functionAddress);
     }
 
     /** Gets the transform if it is relative to a tracked device. Returns an error if the transform is some other type. */
@@ -818,7 +818,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, unDeviceIndex, pchComponentName);
+        return callJPI(ulOverlayHandle, unDeviceIndex, pchComponentName, __functionAddress);
     }
 
     /**
@@ -856,7 +856,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, punDeviceIndex, pchComponentName, unComponentNameSize);
+        return callJPPI(ulOverlayHandle, punDeviceIndex, pchComponentName, unComponentNameSize, __functionAddress);
     }
 
     /** Gets the transform information when the overlay is rendering on a component. */
@@ -875,7 +875,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, ulOverlayHandleParent, pmatParentOverlayToOverlayTransform);
+        return callJPPI(ulOverlayHandle, ulOverlayHandleParent, pmatParentOverlayToOverlayTransform, __functionAddress);
     }
 
     @NativeType("EVROverlayError")
@@ -893,7 +893,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJPI(__functionAddress, ulOverlayHandle, ulOverlayHandleParent, pmatParentOverlayToOverlayTransform);
+        return callJJPI(ulOverlayHandle, ulOverlayHandleParent, pmatParentOverlayToOverlayTransform, __functionAddress);
     }
 
     @NativeType("EVROverlayError")
@@ -910,7 +910,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_HideOverlay ] ---
@@ -922,7 +922,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_IsOverlayVisible ] ---
@@ -934,7 +934,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJZ(__functionAddress, ulOverlayHandle);
+        return callJZ(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_GetTransformForOverlayCoordinates ] ---
@@ -945,7 +945,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, eTrackingOrigin, coordinatesInOverlay, pmatTransform);
+        return callJPPI(ulOverlayHandle, eTrackingOrigin, coordinatesInOverlay, pmatTransform, __functionAddress);
     }
 
     /**
@@ -967,7 +967,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPZ(__functionAddress, ulOverlayHandle, pEvent, uncbVREvent);
+        return callJPZ(ulOverlayHandle, pEvent, uncbVREvent, __functionAddress);
     }
 
     /**
@@ -998,7 +998,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, peInputMethod);
+        return callJPI(ulOverlayHandle, peInputMethod, __functionAddress);
     }
 
     /** Returns the current input settings for the specified overlay. */
@@ -1023,7 +1023,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, eInputMethod);
+        return callJI(ulOverlayHandle, eInputMethod, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayMouseScale ] ---
@@ -1034,7 +1034,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pvecMouseScale);
+        return callJPI(ulOverlayHandle, pvecMouseScale, __functionAddress);
     }
 
     /**
@@ -1054,7 +1054,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pvecMouseScale);
+        return callJPI(ulOverlayHandle, pvecMouseScale, __functionAddress);
     }
 
     /**
@@ -1074,7 +1074,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPZ(__functionAddress, ulOverlayHandle, pParams, pResults);
+        return callJPPZ(ulOverlayHandle, pParams, pResults, __functionAddress);
     }
 
     /**
@@ -1098,7 +1098,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJZ(__functionAddress, ulOverlayHandle);
+        return callJZ(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_GetGamepadFocusOverlay ] ---
@@ -1122,7 +1122,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulNewFocusOverlay);
+        return callJI(ulNewFocusOverlay, __functionAddress);
     }
 
     // --- [ VROverlay_SetOverlayNeighbor ] ---
@@ -1140,7 +1140,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJJI(__functionAddress, eDirection, ulFrom, ulTo);
+        return callJJI(eDirection, ulFrom, ulTo, __functionAddress);
     }
 
     // --- [ VROverlay_MoveGamepadFocusToNeighbor ] ---
@@ -1158,7 +1158,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, eDirection, ulFrom);
+        return callJI(eDirection, ulFrom, __functionAddress);
     }
 
     // --- [ VROverlay_SetOverlayDualAnalogTransform ] ---
@@ -1169,7 +1169,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlay, eWhich, pvCenter, fRadius);
+        return callJPI(ulOverlay, eWhich, pvCenter, fRadius, __functionAddress);
     }
 
     /**
@@ -1190,7 +1190,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlay, eWhich, pvCenter, pfRadius);
+        return callJPPI(ulOverlay, eWhich, pvCenter, pfRadius, __functionAddress);
     }
 
     /**
@@ -1215,7 +1215,7 @@ public class VROverlay {
             check(__functionAddress);
             Texture.validate(pTexture);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pTexture);
+        return callJPI(ulOverlayHandle, pTexture, __functionAddress);
     }
 
     /** Texture to draw for the overlay. This function can only be called by the overlay's creator or renderer process (see {@link #VROverlay_SetOverlayRenderingPid SetOverlayRenderingPid}). */
@@ -1233,7 +1233,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle);
+        return callJI(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_SetOverlayRaw ] ---
@@ -1244,7 +1244,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pvBuffer, unWidth, unHeight, unDepth);
+        return callJPI(ulOverlayHandle, pvBuffer, unWidth, unHeight, unDepth, __functionAddress);
     }
 
     /**
@@ -1264,7 +1264,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pchFilePath);
+        return callJPI(ulOverlayHandle, pchFilePath, __functionAddress);
     }
 
     /**
@@ -1303,7 +1303,7 @@ public class VROverlay {
             check(__functionAddress);
             check(pNativeTextureRef);
         }
-        return callJPPPPPPPPI(__functionAddress, ulOverlayHandle, pNativeTextureHandle, pNativeTextureRef, pWidth, pHeight, pNativeFormat, pAPIType, pColorSpace, pTextureBounds);
+        return callJPPPPPPPPI(ulOverlayHandle, pNativeTextureHandle, pNativeTextureRef, pWidth, pHeight, pNativeFormat, pAPIType, pColorSpace, pTextureBounds, __functionAddress);
     }
 
     /**
@@ -1345,7 +1345,7 @@ public class VROverlay {
             check(__functionAddress);
             check(pNativeTextureHandle);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pNativeTextureHandle);
+        return callJPI(ulOverlayHandle, pNativeTextureHandle, __functionAddress);
     }
 
     // --- [ VROverlay_GetOverlayTextureSize ] ---
@@ -1356,7 +1356,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPI(__functionAddress, ulOverlayHandle, pWidth, pHeight);
+        return callJPPI(ulOverlayHandle, pWidth, pHeight, __functionAddress);
     }
 
     /** Get the size of the overlay texture. */
@@ -1377,7 +1377,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPI(__functionAddress, pchOverlayKey, pchOverlayFriendlyName, pMainHandle, pThumbnailHandle);
+        return callPPPPI(pchOverlayKey, pchOverlayFriendlyName, pMainHandle, pThumbnailHandle, __functionAddress);
     }
 
     /** Creates a dashboard overlay and returns its handle. */
@@ -1430,7 +1430,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJZ(__functionAddress, ulOverlayHandle);
+        return callJZ(ulOverlayHandle, __functionAddress);
     }
 
     // --- [ VROverlay_SetDashboardOverlaySceneProcess ] ---
@@ -1442,7 +1442,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJI(__functionAddress, ulOverlayHandle, unProcessId);
+        return callJI(ulOverlayHandle, unProcessId, __functionAddress);
     }
 
     // --- [ VROverlay_GetDashboardOverlaySceneProcess ] ---
@@ -1453,7 +1453,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, punProcessId);
+        return callJPI(ulOverlayHandle, punProcessId, __functionAddress);
     }
 
     /** Gets the process ID that this dashboard overlay requires to have scene focus. */
@@ -1473,7 +1473,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, pchOverlayToShow);
+        callPV(pchOverlayToShow, __functionAddress);
     }
 
     /** Shows the dashboard. */
@@ -1515,7 +1515,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPJI(__functionAddress, eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue);
+        return callPPJI(eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
     }
 
     /**
@@ -1559,7 +1559,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPPJI(__functionAddress, ulOverlayHandle, eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue);
+        return callJPPJI(ulOverlayHandle, eInputMode, eLineInputMode, pchDescription, unCharMax, pchExistingText, bUseMinimalMode, uUserValue, __functionAddress);
     }
 
     /**
@@ -1599,7 +1599,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPI(__functionAddress, pchText, cchText);
+        return callPI(pchText, cchText, __functionAddress);
     }
 
     /** Get the text that was entered into the text input. */
@@ -1640,7 +1640,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, eTrackingOrigin, pmatTrackingOriginToKeyboardTransform);
+        callPV(eTrackingOrigin, pmatTrackingOriginToKeyboardTransform, __functionAddress);
     }
 
     /**
@@ -1660,7 +1660,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callJPV(__functionAddress, ulOverlayHandle, avoidRect);
+        callJPV(ulOverlayHandle, avoidRect, __functionAddress);
     }
 
     /** Set the position of the keyboard in overlay space by telling it to avoid a rectangle in the overlay. Rectangle coords have (0,0) in the bottom left. */
@@ -1676,7 +1676,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pMaskPrimitives, unNumMaskPrimitives, unPrimitiveSize);
+        return callJPI(ulOverlayHandle, pMaskPrimitives, unNumMaskPrimitives, unPrimitiveSize, __functionAddress);
     }
 
     /** Sets a list of primitives to be used for controller ray intersection typically the size of the underlying UI in pixels(not in world space). */
@@ -1692,7 +1692,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callJPI(__functionAddress, ulOverlayHandle, pFlags);
+        return callJPI(ulOverlayHandle, pFlags, __functionAddress);
     }
 
     @NativeType("EVROverlayError")
@@ -1711,7 +1711,7 @@ public class VROverlay {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return callPPPPPPI(__functionAddress, pchText, pchCaption, pchButton0Text, pchButton1Text, pchButton2Text, pchButton3Text);
+        return callPPPPPPI(pchText, pchCaption, pchButton0Text, pchButton1Text, pchButton2Text, pchButton3Text, __functionAddress);
     }
 
     /** Show the message overlay. This will block and return you a result. */

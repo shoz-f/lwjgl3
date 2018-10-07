@@ -806,7 +806,7 @@ public class GL33C extends GL32C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, samplers.length, samplers);
+        callPV(samplers.length, samplers, __functionAddress);
     }
 
     /**
@@ -819,7 +819,7 @@ public class GL33C extends GL32C {
         if (CHECKS) {
             check(__functionAddress);
         }
-        callPV(__functionAddress, samplers.length, samplers);
+        callPV(samplers.length, samplers, __functionAddress);
     }
 
     /**
@@ -833,7 +833,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -847,7 +847,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -861,7 +861,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -875,7 +875,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -889,7 +889,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -903,7 +903,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -917,7 +917,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -931,7 +931,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, sampler, pname, params);
+        callPV(sampler, pname, params, __functionAddress);
     }
 
     /**
@@ -945,7 +945,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
     /**
@@ -959,7 +959,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(params, 1);
         }
-        callPV(__functionAddress, id, pname, params);
+        callPV(id, pname, params, __functionAddress);
     }
 
     /**
@@ -973,7 +973,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, index, type, normalized, value);
+        callPV(index, type, normalized, value, __functionAddress);
     }
 
     /**
@@ -987,7 +987,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, index, type, normalized, value);
+        callPV(index, type, normalized, value, __functionAddress);
     }
 
     /**
@@ -1001,7 +1001,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, index, type, normalized, value);
+        callPV(index, type, normalized, value, __functionAddress);
     }
 
     /**
@@ -1015,7 +1015,7 @@ public class GL33C extends GL32C {
             check(__functionAddress);
             check(value, 1);
         }
-        callPV(__functionAddress, index, type, normalized, value);
+        callPV(index, type, normalized, value, __functionAddress);
     }
 
 }

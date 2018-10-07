@@ -52,7 +52,7 @@ public class ALC11 extends ALC10 {
         if (CHECKS) {
             check(__functionAddress);
         }
-        return invokePP(__functionAddress, deviceName, frequency, format, samples);
+        return invokePP(deviceName, frequency, format, samples, __functionAddress);
     }
 
     /**
@@ -110,7 +110,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        return invokePZ(__functionAddress, device);
+        return invokePZ(device, __functionAddress);
     }
 
     // --- [ alcCaptureStart ] ---
@@ -131,7 +131,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePV(__functionAddress, device);
+        invokePV(device, __functionAddress);
     }
 
     // --- [ alcCaptureStop ] ---
@@ -151,7 +151,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePV(__functionAddress, device);
+        invokePV(device, __functionAddress);
     }
 
     // --- [ alcCaptureSamples ] ---
@@ -163,7 +163,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /**
@@ -230,7 +230,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
@@ -241,7 +241,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
     /** Array version of: {@link #alcCaptureSamples CaptureSamples} */
@@ -252,7 +252,7 @@ public class ALC11 extends ALC10 {
             check(__functionAddress);
             check(device);
         }
-        invokePPV(__functionAddress, device, buffer, samples);
+        invokePPV(device, buffer, samples, __functionAddress);
     }
 
 }

@@ -378,7 +378,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             checkSafe(length, path.remaining());
         }
-        callPPV(__functionAddress, shader, path.remaining(), memAddress(path), length);
+        callPPV(shader, path.remaining(), memAddress(path), length, __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
@@ -388,7 +388,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             checkSafe(stringlen, 1);
         }
-        callPPPV(__functionAddress, name.remaining(), memAddress(name), string.remaining(), stringlen, memAddress(string));
+        callPPPV(name.remaining(), memAddress(name), string.remaining(), stringlen, memAddress(string), __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringARB GetNamedStringARB} */
@@ -401,7 +401,7 @@ public class ARBShadingLanguageInclude {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer nameEncoded = stack.ASCII(name, false);
-            callPPPV(__functionAddress, nameEncoded.remaining(), memAddress(nameEncoded), string.remaining(), stringlen, memAddress(string));
+            callPPPV(nameEncoded.remaining(), memAddress(nameEncoded), string.remaining(), stringlen, memAddress(string), __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }
@@ -414,7 +414,7 @@ public class ARBShadingLanguageInclude {
             check(__functionAddress);
             check(params, 1);
         }
-        callPPV(__functionAddress, name.remaining(), memAddress(name), pname, params);
+        callPPV(name.remaining(), memAddress(name), pname, params, __functionAddress);
     }
 
     /** Array version of: {@link #glGetNamedStringivARB GetNamedStringivARB} */
@@ -427,7 +427,7 @@ public class ARBShadingLanguageInclude {
         MemoryStack stack = stackGet(); int stackPointer = stack.getPointer();
         try {
             ByteBuffer nameEncoded = stack.ASCII(name, false);
-            callPPV(__functionAddress, nameEncoded.remaining(), memAddress(nameEncoded), pname, params);
+            callPPV(nameEncoded.remaining(), memAddress(nameEncoded), pname, params, __functionAddress);
         } finally {
             stack.setPointer(stackPointer);
         }

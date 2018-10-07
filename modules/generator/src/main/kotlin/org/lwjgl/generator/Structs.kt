@@ -1366,7 +1366,6 @@ ${validations.joinToString("\n")}
                         println("${t}public static void n$setter(long $STRUCT, ${it.nullable(it.nativeType.javaMethodType)} value) { memPutAddress($STRUCT + $field, ${it.addressValue}); }")
                     } else {
                         val javaType = it.nativeType.nativeMethodType
-                        val bufferMethod = getBufferMethod("put", it, javaType)
 
                         if (it.public)
                             println(
