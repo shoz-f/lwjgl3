@@ -4,14 +4,21 @@
  */
 #pragma once
 
+// JNIEXPORT_CRITICAL & CRITICAL are used as a workaround for JDK-8167409 on applicable functions.
 #ifdef LWJGL_WINDOWS
     #include "WindowsConfig.h"
+    #define JNIEXPORT_CRITICAL JNIEXPORT
+    #define CRITICAL(function) JavaCritical_##function
 #endif
 #ifdef LWJGL_LINUX
     #include "LinuxConfig.h"
+    #define JNIEXPORT_CRITICAL static
+    #define CRITICAL(function) _JavaCritical_##function
 #endif
 #ifdef LWJGL_MACOS
     #include "macOSConfig.h"
+    #define JNIEXPORT_CRITICAL static
+    #define CRITICAL(function) _JavaCritical_##function
 #endif
 
 #ifndef DISABLE_WARNINGS

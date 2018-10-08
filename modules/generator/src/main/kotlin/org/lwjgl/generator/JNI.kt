@@ -98,6 +98,16 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
     private val NativeType.jniFunctionTypeArray get() = if (this is ArrayType<*>) "j${this.mapping.primitive}Array" else this.jniFunctionType
     private fun NativeType.jniFunctionTypeArrayCritical(index: Int) = if (this is ArrayType<*>) "jint length$index, j${this.mapping.primitive}*" else this.jniFunctionType
 
+    // 5 normal parameters + 1 function address parameter
+    private fun Signature.workaroundJDK8167409(ignoreArrayType: Boolean = false): Boolean = 5 <= arguments.count() && arguments[0].let { type ->
+        (type is PointerType<*> && (ignoreArrayType || type !is ArrayType<*>)) || type.mapping.let { it is PrimitiveMapping && 4 < it.bytes }
+    }
+
+    private fun Signature.CRITICAL(ignoreArrayType: Boolean = false): String = if (workaroundJDK8167409(ignoreArrayType))
+            "CRITICAL(org_lwjgl_system_JNI_$signatureNative)"
+        else
+            "JavaCritical_org_lwjgl_system_JNI_$signatureNative"
+
     override fun PrintWriter.generateNative() {
         nativeDirective("""
 #ifdef LWJGL_WINDOWS
@@ -110,32 +120,50 @@ object JNI : GeneratorTargetNative(Module.CORE, "JNI") {
         print(HEADER)
         preamble.printNative(this)
 
-        println("""#define ARITY0(type, signature, expression) \
-JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jclass clazz, jlong $FUNCTION_ADDRESS) { \
-    UNUSED_PARAMS($JNIENV, clazz) \
-    expression; \
-}
-
-#define ARITYn(type, signature, expression, ...) \
-JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jclass clazz, __VA_ARGS__, jlong $FUNCTION_ADDRESS) { \
-    UNUSED_PARAMS($JNIENV, clazz) \
-    expression; \
-}
-""")
         sortedSignatures.forEach {
-            print("ARITY${if (it.arguments.isEmpty()) "0" else "n"}(${it.returnType.jniFunctionType}, ${it.signatureNative}, ")
+            print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL ${it.CRITICAL()}(")
+            if (it.arguments.isNotEmpty())
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> "${param.jniFunctionType} param$i" }
+                    .joinToString(", ", postfix = ", "))
+            print("""jlong $FUNCTION_ADDRESS) {
+    """)
             if (it.returnType.mapping !== TypeMapping.VOID) {
                 print("return ")
                 if (it.returnType.isPointer)
                     print("(jlong)")
             }
             print("((${it.returnType.nativeType} (${if (it.callingConvention === CallingConvention.STDCALL) "APIENTRY " else ""}*) ")
-            print(it.arguments.asSequence().map { arg -> arg.nativeType }.joinToString(", ", prefix = "(", postfix = ")"))
-            print(")(intptr_t)$FUNCTION_ADDRESS)")
-            print(it.arguments.asSequence().mapIndexed { i, param -> if (param.isPointer) "(intptr_t)param$i" else "param$i" }.joinToString(", ", prefix = "(", postfix = ")"))
+            print(it.arguments.asSequence()
+                .map { arg -> arg.nativeType }
+                .joinToString(", ", prefix = "(", postfix = ")"))
+            print(")(intptr_t)$FUNCTION_ADDRESS)(")
+            print(it.arguments.asSequence()
+                .mapIndexed { i, param -> if (param.isPointer) "(intptr_t)param$i" else "param$i" }
+                .joinToString(", "))
+            print(""");
+}
+""")
+
+            print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signatureNative}(JNIEnv *$JNIENV, jclass clazz, ")
             if (it.arguments.isNotEmpty())
-                print(it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionType} param$i" }.joinToString(", ", prefix = ", "))
-            println(")")
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, param -> "${param.jniFunctionType} param$i" }
+                    .joinToString(", ", postfix = ", "))
+            print("""jlong $FUNCTION_ADDRESS) {
+    UNUSED_PARAMS($JNIENV, clazz)
+    """)
+            if (it.returnType.mapping !== TypeMapping.VOID) {
+                print("return ")
+            }
+            print("${it.CRITICAL()}(")
+            if (it.arguments.isNotEmpty())
+                print(it.arguments.asSequence()
+                    .mapIndexed { i, _ -> "param$i" }
+                    .joinToString(", ", postfix = ", "))
+            print("""$FUNCTION_ADDRESS);
+}
+""")
         }
 
         println()
@@ -143,13 +171,17 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
         sortedSignaturesArray.forEach {
             println(
                 """JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signatureArray}(JNIEnv *$JNIENV, jclass clazz, ${
-                if (it.arguments.isEmpty()) "" else it.arguments.mapIndexed { i, param -> "${param.jniFunctionTypeArray} param$i" }.joinToString(", ")
+                if (it.arguments.isEmpty()) "" else it.arguments
+                    .mapIndexed { i, param -> "${param.jniFunctionTypeArray} param$i" }
+                    .joinToString(", ")
                 }, jlong $FUNCTION_ADDRESS) {
     UNUSED_PARAMS($JNIENV, clazz)
     ${it.arguments.asSequence()
                     .mapIndexedNotNull { i, param -> if (param !is ArrayType<*>) null else "void *paramArray$i = param$i == NULL ? NULL : (*$JNIENV)->GetPrimitiveArrayCritical($JNIENV, param$i, 0);" }
                     .joinToString("\n$t")}
-    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)paramArray$i" else "param$i" }.joinToString(", ")}, $FUNCTION_ADDRESS);
+    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "${it.returnType.jniFunctionType} __result = "}${it.CRITICAL(true)}(${it.arguments
+                    .mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)paramArray$i" else "param$i" }
+                    .joinToString(", ")}, $FUNCTION_ADDRESS);
     ${it.arguments.asSequence()
                     .withIndex()
                     .sortedByDescending { arg -> arg.index }
@@ -157,18 +189,17 @@ JNIEXPORT type JNICALL Java_org_lwjgl_system_JNI_##signature(JNIEnv *$JNIENV, jc
                     .joinToString("\n$t")}${if (it.returnType.mapping === TypeMapping.VOID) "" else """
     return __result;"""}
 }""")
-            val workaroundJDK8167409 = 6 <= it.arguments.count() && it.arguments.any { type ->
-                (type is PointerType<*> && type !is ArrayType<*>) || type.mapping.let { mapping -> mapping is PrimitiveMapping && 4 < mapping.bytes }
-            }
-            if (workaroundJDK8167409) println("#ifdef LWJGL_WINDOWS")
+            if (it.workaroundJDK8167409()) println("#ifdef LWJGL_WINDOWS")
             println(
                 """JNIEXPORT ${it.returnType.jniFunctionType} JNICALL JavaCritical_org_lwjgl_system_JNI_${it.signatureArray}(${
                 if (it.arguments.isEmpty()) "" else it.arguments.asSequence().mapIndexed { i, param -> "${param.jniFunctionTypeArrayCritical(i)} param$i" }.joinToString(", ")
                 }, jlong $FUNCTION_ADDRESS) {
     ${it.arguments.asSequence().mapIndexedNotNull { i, param -> if (param !is ArrayType<*>) null else "UNUSED_PARAM(length$i)" }.joinToString("\n$t")}
-    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "return "}Java_org_lwjgl_system_JNI_${it.signatureNative}(NULL, NULL, ${it.arguments.mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)param$i" else "param$i" }.joinToString(", ")}, $FUNCTION_ADDRESS);
+    ${if (it.returnType.mapping === TypeMapping.VOID) "" else "return "}${it.CRITICAL(true)}(${it.arguments
+                    .mapIndexed { i, param -> if (param is ArrayType<*>) "(intptr_t)param$i" else "param$i" }
+                    .joinToString(", ")}, $FUNCTION_ADDRESS);
 }""")
-            if (workaroundJDK8167409) println("#endif")
+            if (it.workaroundJDK8167409()) println("#endif")
         }
 
         println("\nEXTERN_C_EXIT")
