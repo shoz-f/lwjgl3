@@ -4,15 +4,22 @@
  */
 package org.lwjgl.demo.system.jawt;
 
+import org.lwjgl.*;
 import org.lwjgl.demo.opengl.*;
 import org.lwjgl.opengl.*;
+import org.lwjgl.system.*;
 import org.lwjgl.system.jawt.JAWT;
 import org.lwjgl.system.jawt.*;
+import org.lwjgl.system.linux.*;
 import org.lwjgl.system.windows.*;
 
 import java.awt.*;
+import java.nio.*;
+import java.util.*;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GLX.*;
+import static org.lwjgl.opengl.GLX13.*;
 import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jawt.JAWTFunctions.*;
@@ -30,7 +37,7 @@ public class LWJGLCanvas extends Canvas {
 
     private final AbstractGears gears;
 
-    private long hglrc;
+    private long context;
 
     private GLCapabilities caps;
 
@@ -72,35 +79,55 @@ public class LWJGLCanvas extends Canvas {
                 }
 
                 try {
-                    // Get the platform-specific drawing info
-                    JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
-                    long                        hdc     = dsi_win.hdc();
-                    if (hdc != NULL) {
-                        if (hglrc == NULL) {
-                            createContext(dsi_win);
-                            gears.initGLState();
-                        } else {
-                            if (!wglMakeCurrent(hdc, hglrc)) {
-                                throw new IllegalStateException("wglMakeCurrent() failed");
+                    switch (Platform.get()) {
+                        case LINUX:
+                            // Get the platform-specific drawing info
+                            JAWTX11DrawingSurfaceInfo dsi_x11 = JAWTX11DrawingSurfaceInfo.create(dsi.platformInfo());
+
+                            long drawable = dsi_x11.drawable();
+                            if (drawable != NULL) {
+                                if (context == NULL) {
+                                    createContext(dsi_x11);
+                                    gears.initGLState();
+                                } else {
+                                    if (!glXMakeCurrent(dsi_x11.display(), drawable, context)) {
+                                        throw new IllegalStateException("glXMakeCurrent() failed");
+                                    }
+
+                                    GL.setCapabilities(caps);
+                                }
+
+                                render();
+                                glXSwapBuffers(dsi_x11.display(), drawable);
+
+                                glXMakeCurrent(dsi_x11.display(), NULL, NULL);
+                                GL.setCapabilities(null);
                             }
+                            break;
+                        case WINDOWS:
+                            // Get the platform-specific drawing info
+                            JAWTWin32DrawingSurfaceInfo dsi_win = JAWTWin32DrawingSurfaceInfo.create(dsi.platformInfo());
 
-                            GL.setCapabilities(caps);
-                        }
+                            long hdc = dsi_win.hdc();
+                            if (hdc != NULL) {
+                                if (context == NULL) {
+                                    createContext(dsi_win);
+                                    gears.initGLState();
+                                } else {
+                                    if (!wglMakeCurrent(hdc, context)) {
+                                        throw new IllegalStateException("wglMakeCurrent() failed");
+                                    }
 
-                        glViewport(0, 0, getWidth(), getHeight());
+                                    GL.setCapabilities(caps);
+                                }
 
-                        float f = getHeight() / (float)getWidth();
+                                render();
+                                SwapBuffers(hdc);
 
-                        glMatrixMode(GL_PROJECTION);
-                        glLoadIdentity();
-                        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
-                        glMatrixMode(GL_MODELVIEW);
-
-                        gears.renderLoop();
-                        SwapBuffers(hdc);
-
-                        wglMakeCurrent(NULL, NULL);
-                        GL.setCapabilities(null);
+                                wglMakeCurrent(NULL, NULL);
+                                GL.setCapabilities(null);
+                            }
+                            break;
                     }
                 } finally {
                     // Free the drawing surface info
@@ -116,6 +143,19 @@ public class LWJGLCanvas extends Canvas {
         }
 
         repaint();
+    }
+
+    private void render() {
+        glViewport(0, 0, getWidth(), getHeight());
+
+        float f = getHeight() / (float)getWidth();
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glFrustum(-1.0f, 1.0f, -f, f, 5.0f, 100.0f);
+        glMatrixMode(GL_MODELVIEW);
+
+        gears.renderLoop();
     }
 
     // Simplest possible context creation.
@@ -150,14 +190,41 @@ public class LWJGLCanvas extends Canvas {
             }
         }
 
-        hglrc = wglCreateContext(hdc);
-
-        if (hglrc == NULL) {
+        context = wglCreateContext(hdc);
+        if (context == NULL) {
             throw new IllegalStateException("wglCreateContext() failed");
         }
 
-        if (!wglMakeCurrent(hdc, hglrc)) {
+        if (!wglMakeCurrent(hdc, context)) {
             throw new IllegalStateException("wglMakeCurrent() failed");
+        }
+
+        caps = GL.createCapabilities();
+    }
+
+    // Simplest possible context creation.
+    private void createContext(JAWTX11DrawingSurfaceInfo dsi_x11) {
+        long display  = dsi_x11.display();
+        long drawable = dsi_x11.drawable();
+
+        PointerBuffer configs = Objects.requireNonNull(glXChooseFBConfig(display, 0, (IntBuffer)null));
+
+        long config = NULL;
+        for (int i = 0; i < configs.remaining(); i++) {
+            XVisualInfo vi = Objects.requireNonNull(glXGetVisualFromFBConfig(display, configs.get(i)));
+            if (vi.visualid() == dsi_x11.visualID()) {
+                config = configs.get(i);
+                break;
+            }
+        }
+
+        context = glXCreateNewContext(display, config, GLX_RGBA_TYPE, NULL, true);
+        if (context == NULL) {
+            throw new IllegalStateException("glXCreateContext() failed");
+        }
+
+        if (!glXMakeCurrent(display, drawable, context)) {
+            throw new IllegalStateException("glXMakeCurrent() failed");
         }
 
         caps = GL.createCapabilities();
@@ -166,8 +233,8 @@ public class LWJGLCanvas extends Canvas {
     public void destroy() {
         awt.free();
 
-        if (hglrc != NULL) {
-            wglDeleteContext(hglrc);
+        if (context != NULL) {
+            wglDeleteContext(context);
         }
     }
 
