@@ -253,6 +253,11 @@ public class Configuration<T> {
     /** Similar to {@link #LIBRARY_NAME} for the BGFX library (<b>org.lwjgl.bgfx.libname</b>). */
     public static final Configuration<String> BGFX_LIBRARY_NAME = new Configuration<>("org.lwjgl.bgfx.libname", StateInit.STRING);
 
+    // -- CUDA
+
+    /** Similar to {@link #LIBRARY_NAME} for CUDA (<b>org.lwjgl.cuda.libname</b>). */
+    public static final Configuration<String> CUDA_LIBRARY_NAME = new Configuration<>("org.lwjgl.cuda.libname", StateInit.STRING);
+
     // -- EGL
 
     /**
